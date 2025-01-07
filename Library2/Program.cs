@@ -7,28 +7,30 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 
-namespace Library2
+namespace Library
 {
     
      class Program
-    {
+     {
        
-        static void Main(string[] args)
-        {
-            Console.WriteLine(Library.connectionString);
-            
-
-            Library.Insert("Authors", "author_id,last_name,first_name", "12,'Mazin','Alexander'");
+         static void Main(string[] args)
+         {
+          
+            //Console.WriteLine(Library.GetAuthorID("Bjarne Stroustrup"));Data Source=(localdb)\MSSQLLocalDB;Initial
+            //Catalog=Library;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False
+           // Library.InsertBook(7, "C++ Programming Language", 331, "1986-01-29", "Bjarne Stroustrup");
+           // Library.InsertAuthor(5, "Stroustrup", "Bjarne");
+            Library.Insert("Authors", "author_id,last_name,first_name", "16,'Mazinsss','Alexander'");
            // Library.Insert("Authors", "author_id,last_name,first_name", "5,'Bjarne','Stroustrup'");
-            //Library.Insert
-               // (
-                //"Books",
-                //"book_id,title_book,book_size,publish_date,author",
-               // "6,'Vikings',950,'2010-10-10',10"
-               // );
+            Library.Insert
+                (
+                "Books",
+                "book_id,book_title,book_size,publish_date,author",
+                "11,'Vikings',950,'2010-10-10',10"
+                );
             Library.Select("author_id,first_name,last_name", "Authors");
-            Library.Select("book_title,size,[Author]=first_name+ ' ' + last_name","Books,Authors","author=author_id;DROP TABLE Genres",15);
+            Library.Select("book_title,publish_date,[Author]=first_name+ ' ' + last_name","Books,Authors","author=author_id",32);
 
-        }
-    }
+         }
+     }
 }

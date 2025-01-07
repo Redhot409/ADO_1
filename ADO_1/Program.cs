@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,8 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using System.Dynamic;
+using static System.Net.Mime.MediaTypeNames;
+using System.Runtime.Remoting.Contexts;
 
 namespace ADO_1
 {
@@ -16,7 +19,7 @@ namespace ADO_1
             string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Library;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             Console.WriteLine(connectionString);
             Console.WriteLine("\n----------------------------------------------------------------\n");
-
+            
             SqlConnection connection = new SqlConnection(connectionString);
             string cmd = "SELECT * FROM Authors";
             SqlCommand command = new SqlCommand(cmd, connection);
@@ -82,7 +85,10 @@ namespace ADO_1
             //connection_1.Close();
             //Console.WriteLine("\n-----------------------------------------------------------------------\n");
 
-            command.CommandText = "SELECT book_title, last_name + ' ' + first_name AS 'Author'FROM Books JOIN Authors ON(author=author_id)";
+
+
+
+            command.CommandText = "SELECT book_title, first_name + ' ' + last_name AS 'Author' FROM Books JOIN Authors ON(author=author_id)";
             connection.Open();
             reader= command.ExecuteReader();
             if (reader.HasRows)
@@ -103,8 +109,10 @@ namespace ADO_1
             }
             reader.Close();
             connection.Close();
-            Console.WriteLine("\n=====================================================\n");
+            Console.WriteLine("\n=========================================================================\n");
             //////////////////////////////////////////////////////////////////////////////////////////////////////
+            ///
+
 
             command.CommandText = "SELECT first_name+' '+last_name AS 'Author', COUNT(book_id) AS 'Books count'" +
                                   "FROM Books JOIN Authors ON (author=author_id)" +
@@ -125,6 +133,7 @@ namespace ADO_1
                     Console.WriteLine();
                 }
             }
+            reader.Close();
             connection.Close();
 
         }
