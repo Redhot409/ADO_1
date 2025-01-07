@@ -30,18 +30,18 @@
         {
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageStudents = new System.Windows.Forms.TabPage();
-            this.tabPageGroups = new System.Windows.Forms.TabPage();
+            this.dataGridViewStudents = new System.Windows.Forms.DataGridView();
             this.statusStripStudents = new System.Windows.Forms.StatusStrip();
             this.tslStudentsCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tabPageGroups = new System.Windows.Forms.TabPage();
             this.statusStripGroups = new System.Windows.Forms.StatusStrip();
             this.tslGroupCount = new System.Windows.Forms.ToolStripStatusLabel();
-            this.dataGridViewStudents = new System.Windows.Forms.DataGridView();
             this.tabControl.SuspendLayout();
             this.tabPageStudents.SuspendLayout();
-            this.tabPageGroups.SuspendLayout();
-            this.statusStripStudents.SuspendLayout();
-            this.statusStripGroups.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStudents)).BeginInit();
+            this.statusStripStudents.SuspendLayout();
+            this.tabPageGroups.SuspendLayout();
+            this.statusStripGroups.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -52,7 +52,7 @@
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(800, 450);
+            this.tabControl.Size = new System.Drawing.Size(876, 450);
             this.tabControl.TabIndex = 0;
             // 
             // tabPageStudents
@@ -62,10 +62,37 @@
             this.tabPageStudents.Location = new System.Drawing.Point(4, 22);
             this.tabPageStudents.Name = "tabPageStudents";
             this.tabPageStudents.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageStudents.Size = new System.Drawing.Size(792, 424);
+            this.tabPageStudents.Size = new System.Drawing.Size(868, 424);
             this.tabPageStudents.TabIndex = 0;
             this.tabPageStudents.Text = "Students";
             this.tabPageStudents.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewStudents
+            // 
+            this.dataGridViewStudents.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStudents.Location = new System.Drawing.Point(0, 23);
+            this.dataGridViewStudents.Name = "dataGridViewStudents";
+            this.dataGridViewStudents.Size = new System.Drawing.Size(868, 350);
+            this.dataGridViewStudents.TabIndex = 1;
+            // 
+            // statusStripStudents
+            // 
+            this.statusStripStudents.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tslStudentsCount});
+            this.statusStripStudents.Location = new System.Drawing.Point(3, 399);
+            this.statusStripStudents.Name = "statusStripStudents";
+            this.statusStripStudents.Size = new System.Drawing.Size(862, 22);
+            this.statusStripStudents.TabIndex = 0;
+            this.statusStripStudents.Text = "statusStrip1";
+            // 
+            // tslStudentsCount
+            // 
+            this.tslStudentsCount.Name = "tslStudentsCount";
+            this.tslStudentsCount.Size = new System.Drawing.Size(129, 17);
+            this.tslStudentsCount.Text = "Количество студентов";
             // 
             // tabPageGroups
             // 
@@ -77,22 +104,6 @@
             this.tabPageGroups.TabIndex = 1;
             this.tabPageGroups.Text = "Groups";
             this.tabPageGroups.UseVisualStyleBackColor = true;
-            // 
-            // statusStripStudents
-            // 
-            this.statusStripStudents.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tslStudentsCount});
-            this.statusStripStudents.Location = new System.Drawing.Point(3, 399);
-            this.statusStripStudents.Name = "statusStripStudents";
-            this.statusStripStudents.Size = new System.Drawing.Size(786, 22);
-            this.statusStripStudents.TabIndex = 0;
-            this.statusStripStudents.Text = "statusStrip1";
-            // 
-            // tslStudentsCount
-            // 
-            this.tslStudentsCount.Name = "tslStudentsCount";
-            this.tslStudentsCount.Size = new System.Drawing.Size(129, 17);
-            this.tslStudentsCount.Text = "Количество студентов";
             // 
             // statusStripGroups
             // 
@@ -110,35 +121,24 @@
             this.tslGroupCount.Size = new System.Drawing.Size(107, 17);
             this.tslGroupCount.Text = "Количество групп";
             // 
-            // dataGridViewStudents
-            // 
-            this.dataGridViewStudents.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridViewStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewStudents.Location = new System.Drawing.Point(0, 23);
-            this.dataGridViewStudents.Name = "dataGridViewStudents";
-            this.dataGridViewStudents.Size = new System.Drawing.Size(792, 350);
-            this.dataGridViewStudents.TabIndex = 1;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(876, 450);
             this.Controls.Add(this.tabControl);
             this.Name = "MainForm";
             this.Text = "Academy";
             this.tabControl.ResumeLayout(false);
             this.tabPageStudents.ResumeLayout(false);
             this.tabPageStudents.PerformLayout();
-            this.tabPageGroups.ResumeLayout(false);
-            this.tabPageGroups.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStudents)).EndInit();
             this.statusStripStudents.ResumeLayout(false);
             this.statusStripStudents.PerformLayout();
+            this.tabPageGroups.ResumeLayout(false);
+            this.tabPageGroups.PerformLayout();
             this.statusStripGroups.ResumeLayout(false);
             this.statusStripGroups.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStudents)).EndInit();
             this.ResumeLayout(false);
 
         }
