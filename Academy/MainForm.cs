@@ -19,7 +19,8 @@ namespace Academy
         string connectionsString;
         SqlConnection connection;
 
-        Dictionary<string, int> d_groups_directions;
+        Dictionary<string, int> d_directions;
+        Dictionary<string, int> d_groups;
         public MainForm()
         {
             InitializeComponent();
@@ -27,9 +28,18 @@ namespace Academy
             MessageBox.Show(this.connectionsString, "Connection string", MessageBoxButtons.OK, MessageBoxIcon.Information);
             connection=new SqlConnection(connectionsString);
 
+           
+
             LoadStudents();
             LoadGroups();
-            LoadDirections();
+            //LoadDirections();
+            LoadTeachers();
+
+            d_groups = Connector.LoadPair("group_name", "group_id", "Groups");
+            d_directions = Connector.LoadPair("direction_name", "direction_id", "Directions");
+            LoadDictionaryToComboBox(d_directions, cbStudentsDirection);
+            LoadDictionaryToComboBox(d_directions, cbGroupsDirection);
+            LoadDictionaryToComboBox(d_groups, cbStudentsGroup);
         }
         void LoadStudents()
         {
@@ -77,33 +87,60 @@ namespace Academy
         { 
             dgvGroups.DataSource = Connector.LoadData
                 (
-                    "group_id AS ID, group_name AS N'Название группы', direction_name AS N'Направление обучения'",
-                    "Groups, Directions",
-                    "direction = direction_id"
+                    "group_id AS ID," +
+                    "group_name AS N'Название группы'," +
+                    "direction_name AS N'Направление обучения'," +
+                    "COUNT(student_id) AS N'Количество студентов'",
+
+                    "Students, Groups, Directions",
+                    "direction = direction_id AND [group] = group_id" +
+                    " GROUP BY group_id, group_name, direction_name"
                 );
             tslGroupCount.Text = $"Количество групп: {dgvGroups.RowCount - 1}";
         }
-        void LoadDirections()
+        //void LoadDirections()
+        //{
+        //    //DataTable dt_directions = Connector.LoadData("direction_id, direction_name","Directions");
+        //    //cbGroupsDirection.Items.AddRange(dt_directions);
+        //    d_groups_directions = Connector.LoadPair("direction_name", "direction_id", "Directions");
+        //    cbGroupsDirection.Items.AddRange (d_groups_directions.Keys.ToArray());
+        //    cbGroupsDirection.Items.Insert(0, "Все");
+        //    cbGroupsDirection.SelectedIndex = 0;
+            
+        //}
+
+        void LoadDictionaryToComboBox(Dictionary<string,int> tree, ComboBox cb)
         {
             //DataTable dt_directions = Connector.LoadData("direction_id, direction_name","Directions");
             //cbGroupsDirection.Items.AddRange(dt_directions);
-            d_groups_directions = Connector.LoadPair("direction_name", "direction_id", "Directions");
-            cbGroupsDirection.Items.AddRange (d_groups_directions.Keys.ToArray());
-            cbGroupsDirection.Items.Insert(0, "Все");
-            cbGroupsDirection.SelectedIndex = 0;
-            
+            //d_groups_directions = Connector.LoadPair("direction_name", "direction_id", "Directions");
+            cb.Items.AddRange(tree.Keys.ToArray());
+            cb.Items.Insert(0, "Все");
+            cb.SelectedIndex = 0;
+
+        }
+
+        void LoadTeachers()
+        {
+           dgvTeachers.DataSource = Connector.LoadData
+                (
+                    "teacher_id as 'ID'," +
+                    "last_name AS N'Фамилия', first_name AS N'Имя', " +
+                    "ISNULL(middle_name,N'') AS 'Отчество', " +
+                    "CONVERT(NVARCHAR, birth_date, 104) AS 'Дата рождения', " +
+                    "DATEDIFF(DAY, works_since,GETDATE())/365 AS N'Стаж', " +
+                    " rate AS 'Оклад'",
+                    "Teachers"
+
+                );
+            tslTeachersCount.Text = $"Количество учителей: {dgvTeachers.RowCount - 1}";
+
         }
 
         private void cbGroupsDirection_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cbGroupsDirection.SelectedIndex ==0) LoadGroups();
-           else dgvGroups.DataSource = Connector.LoadData
-                (
-                    "group_id, group_name, direction_name",
-                    "Groups, Directions",
-                    $"direction=direction_id AND direction = {d_groups_directions[cbGroupsDirection.SelectedItem.ToString()]}"
-                );
-            tslGroupCount.Text = $"Количество групп: {(dgvGroups.RowCount == 0 ? 0 : dgvGroups.RowCount - 1)}.";
+
         }
+
     }
 }
